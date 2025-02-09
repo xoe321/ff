@@ -1,53 +1,58 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head>
+  <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Unity WebGL Player</title>
+    <title>Unity WebGL Player | My project</title>
+    <link rel="shortcut icon" href="TemplateData/favicon.ico">
+    <link rel="stylesheet" href="TemplateData/style.css">
     <style>
-        html, body {
-            margin: 0;
-            padding: 0;
-            overflow: hidden; /* ปิดการเลื่อน */
-            width: 100%;
-            height: 100%;
-            background: black;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        canvas {
-            width: 1920px;
-            height: 1080px;
-        }
+      html, body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden; /* ปิดการเลื่อนหน้าเว็บ */
+        width: 100%;
+        height: 100%;
+      }
+      #unity-container {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      #unity-canvas {
+        width: 1920px;
+        height: 1080px;
+      }
     </style>
-</head>
-<body>
-    <canvas id="unity-canvas" width="1920" height="1080"></canvas>
-
+  </head>
+  <body>
+    <div id="unity-container">
+      <canvas id="unity-canvas" width="1920" height="1080" tabindex="-1"></canvas>
+    </div>
     <script>
-        var canvas = document.getElementById("unity-canvas");
-
-        var buildUrl = "Build";
-        var loaderUrl = buildUrl + "/อย่าลบ.loader.js";
-        var config = {
-            dataUrl: buildUrl + "/อย่าลบ.data",
-            frameworkUrl: buildUrl + "/อย่าลบ.framework.js",
-            codeUrl: buildUrl + "/อย่าลบ.wasm",
-            streamingAssetsUrl: "StreamingAssets",
-            companyName: "DefaultCompany",
-            productName: "My Project",
-            productVersion: "0.1"
-        };
-
-        var script = document.createElement("script");
-        script.src = loaderUrl;
-        script.onload = () => {
-            createUnityInstance(canvas, config).catch((message) => {
-                alert(message);
-            });
-        };
-        document.body.appendChild(script);
+      var container = document.querySelector("#unity-container");
+      var canvas = document.querySelector("#unity-canvas");
+      var buildUrl = "Build";
+      var loaderUrl = buildUrl + "/อย่าลบ.loader.js";
+      var config = {
+        dataUrl: buildUrl + "/อย่าลบ.data",
+        frameworkUrl: buildUrl + "/อย่าลบ.framework.js",
+        codeUrl: buildUrl + "/อย่าลบ.wasm",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "DefaultCompany",
+        productName: "My project",
+        productVersion: "0.1",
+      };
+      var script = document.createElement("script");
+      script.src = loaderUrl;
+      script.onload = () => {
+        createUnityInstance(canvas, config).catch((message) => {
+          alert(message);
+        });
+      };
+      document.body.appendChild(script);
     </script>
-</body>
+  </body>
 </html>
